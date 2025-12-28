@@ -1,0 +1,45 @@
+# Python
+# Byte-code files
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# Distributions and packaging
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+wheels/
+share/python-wheels/
+*.whl
+# General ignores for testing, development, and packaging
+build/
+dist/
+*.egg-info/
+.tox/
+
+# Data and ML artifacts (Specific for ML projects)
+# Ignore large data files and models that should not be in Git
+data/
+models/
+*Outputs/*
+notebooks/checkpoints/ # Jupyter notebook checkpoints
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.csv
+*.txt
+*.npz
+
+# VS Code
+# VS Code specific template is maintained in a separate VisualStudioCode.gitignore
+# that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
+.vscode/*
+# Uncomment the following lines to not ignore the files below
+!**/.vscode/settings.json
+!**/.vscode/tasks.json
+!**/.vscode/launch.json
+!**/.vscode/extensions.json
