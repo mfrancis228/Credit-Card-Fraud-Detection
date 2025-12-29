@@ -1,0 +1,16 @@
+# Create the virtual environment
+python -m venv venv
+
+# Activate the environment
+venv\Scripts\activate
+
+
+# Uptade pip
+pip install --upgrade pip
+
+or 
+
+python -m pip install --upgrade pip
+
+# Install required packages
+pip install -r requirements.txt

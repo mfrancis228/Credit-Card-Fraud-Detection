@@ -31,7 +31,6 @@ notebooks/checkpoints/ # Jupyter notebook checkpoints
 *.h5
 *.keras
 *.csv
-*.txt
 *.npz
 
 # VS Code

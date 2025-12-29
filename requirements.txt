@@ -1,0 +1,15 @@
+# Manipulation de données
+pandas
+numpy
+
+# Visualisation
+matplotlib
+seaborn
+plotly
+
+# Machine Learning
+imbalanced-learn
+scikit-learn
+
+# Configuration et utilitaires
+pyyaml
