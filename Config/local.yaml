@@ -1,0 +1,4 @@
+# Config/local.yaml
+data_path: "D:/Project/Data for data science/Credit Card Fraud Detection/creditcard.csv"
+model_output_path: "Outputs/Models/"
+image_output_path: "Outputs/Images/"
