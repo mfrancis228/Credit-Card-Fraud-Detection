@@ -10,6 +10,8 @@ plotly
 # Machine Learning
 imbalanced-learn
 scikit-learn
+xgboost
+lightgbm
 
 # Configuration et utilitaires
 pyyaml

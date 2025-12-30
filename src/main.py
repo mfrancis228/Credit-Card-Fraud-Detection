@@ -10,6 +10,8 @@ from train_test_split import prepare_base_split, get_experiment_data
 from model_training import get_models, train_model, save_trained_model
 from evaluate import evaluate_model
 import pandas as pd
+from ensemble_model import get_stacking_ensemble, save_ensemble
+from evaluate import evaluate_model
 
 def main():
     # 1. Initialisation
@@ -49,7 +51,21 @@ def main():
     print("RÉSULTATS COMPARATIFS DES EXPÉRIENCES")
     print("="*50)
     print(df_results.sort_values(by="F1_Fraud", ascending=False).to_string(index=False))
+    output_df_path = r"D:\Project\Data science\Learning\Credit Card Fraud Detection\Outputs\Training result.csv"
+    df_results.to_csv(output_df_path)
+    
+    print("\n--- Entraînement de l'Ensemble Learning (Stacking) ---")
+    ensemble_model = get_stacking_ensemble()
 
+    # Option A : Entraînement sur données Standard
+    ensemble_model.fit(X_train_base, y_train_base)
+    res_stack = evaluate_model(ensemble_model, X_test, y_test, "Stacking_Standard")
+
+    # Option B : On peut aussi l'entraîner sur SMOTE pour voir si le Recall décolle
+    # ensemble_model.fit(X_train_smote, y_train_smote)
+    # res_stack_smote = evaluate_model(ensemble_model, X_test, y_test, "Stacking_SMOTE")
+
+    save_ensemble(ensemble_model)
 
 if __name__ == "__main__":
     main()
