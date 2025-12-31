@@ -11,7 +11,6 @@ from model_training import get_models, train_model, save_trained_model
 from evaluate import evaluate_model
 import pandas as pd
 from ensemble_model import get_stacking_ensemble, save_ensemble
-from evaluate import evaluate_model
 
 def main():
     # 1. Initialisation
@@ -20,7 +19,7 @@ def main():
     if data is None: return
 
     # 2. Split de base
-    X_train_base, X_test, y_train_base, y_test = prepare_base_split(data)
+    X_train_base, X_test, y_train_base, y_test = prepare_base_split(data) 
     
     sampling_methods = ['standard', 'undersampling', 'smote']
     models_to_test = get_models()
