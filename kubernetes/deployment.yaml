@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fds-deployment
+  labels:
+    app: sentinelle-fds
+spec:
+  replicas: 2 # On commence avec 2 instances pour la haute disponibilité
+  selector:
+    matchLabels:
+      app: sentinelle-fds
+  template:
+    metadata:
+      labels:
+        app: sentinelle-fds
+    spec:
+      containers:
+      - name: fds-api
+        image: sentinelle-fds:v1
+        imagePullPolicy: Never # Important pour utiliser l'image locale de Minikube
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fds-service
+spec:
+  type: NodePort # Permet d'accéder au service depuis l'extérieur de Minikube
+  selector:
+    app: sentinelle-fds
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

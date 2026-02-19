@@ -1,0 +1,69 @@
+======================================================================
+SENTINELLE FDS - GUIDE DES OPÉRATIONS (DOCKER & MINIKUBE)
+======================================================================
+
+1. GESTION DOCKER (LOCAL)
+----------------------------------------------------------------------
+# Construire l'image Docker
+docker build -t sentinelle-fds:v1 .
+
+# Lancer le conteneur en local (port 8000)
+docker run -d -p 8000:8000 --name fds-container sentinelle-fds:v1
+
+# Voir les logs du conteneur
+docker logs -f fds-container
+
+# Arrêter et supprimer le conteneur local
+docker stop fds-container
+docker rm fds-container
+
+
+2. PRÉPARATION MINIKUBE
+----------------------------------------------------------------------
+# Démarrer le cluster Minikube
+minikube start
+
+# Charger l'image Docker locale dans le cluster Minikube
+minikube image load sentinelle-fds:v1
+
+# (Optionnel) Utiliser directement le démon Docker de Minikube
+# Windows (PowerShell): & minikube -p minikube docker-env | Invoke-Expression
+# Linux/Mac: eval $(minikube docker-env)
+
+
+3. DÉPLOIEMENT KUBERNETES (K8S)
+----------------------------------------------------------------------
+# Appliquer le déploiement et le service
+kubectl apply -f kubernetes/deployment.yaml
+
+# Activer l'Auto-scaling (HPA)
+kubectl autoscale deployment fds-deployment --cpu-percent=50 --min=2 --max=5
+
+# Vérifier l'état des pods et services
+kubectl get pods
+kubectl get service fds-service
+kubectl get hpa
+
+
+4. ACCÈS ET TESTS
+----------------------------------------------------------------------
+# Obtenir l'URL de l'API Sentinelle
+minikube service fds-service --url
+
+# Ouvrir le Dashboard de contrôle graphique
+minikube dashboard
+
+
+5. ARRÊT ET NETTOYAGE
+----------------------------------------------------------------------
+# Supprimer l'application du cluster (Pods, Service, HPA)
+kubectl delete -f kubernetes/deployment.yaml
+kubectl delete hpa fds-deployment
+
+# Arrêter proprement le cluster Minikube (Mise en veille)
+minikube stop
+
+# Supprimer totalement le cluster (Nettoyage complet)
+minikube delete --all
+
+======================================================================
